@@ -22,7 +22,8 @@ from travelers_app.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     # path('t', test),
-    path('travelers/',include('travelers_app.urls'))
+    path('travelers/',include('travelers_app.urls')),
+    path('trips/',include('homepage.urls'))
 ]
 
 if settings.DEBUG:

@@ -70,4 +70,39 @@ class LoginView(APIView):
             'access':str(refresh_token.access_token)
         }
         return Response(data,200)
+    
+
+class UpdateProfile(APIView):
+    
+    def put(self,request):
+        # traveler = request.user
+        profile = request.data['profile']
+        traveler = Traveler.objects.get(email='madhu@email.com')
+        # profile = Traveler.objects.get(email=traveler.email)
+        traveler.profile = profile
+        traveler.save()
+        return Response('Success!',200)
+        
+class UpdateName(APIView):
+    
+    def put(self,request):
+        # traveler = request.user
+        name = request.data['name']
+        traveler = Traveler.objects.get(email='madhu@email.com')
+        # profile = Traveler.objects.get(email=traveler.email)
+        traveler.name = name
+        traveler.save()
+        return Response('Success!',200)
+    
+class UpdateNumber(APIView):
+    
+    def put(self,request):
+        # traveler = request.user
+        number = request.data['number']
+        traveler = Traveler.objects.get(email='madhu@email.com')
+        # profile = Traveler.objects.get(email=traveler.email)
+        traveler.phone_number = number
+        traveler.save()
+        return Response('Success!',200)
+        
         
