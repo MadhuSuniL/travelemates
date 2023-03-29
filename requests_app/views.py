@@ -5,11 +5,10 @@ from travelers_app.models import Traveler
 from homepage.models import Trip
 from .models import Request
 from .serializers import *
-# Create your views here.
 
 
 class AllRequests(APIView):
-    
+
     def get(self,request):
         id = request.user.id
         id = 22

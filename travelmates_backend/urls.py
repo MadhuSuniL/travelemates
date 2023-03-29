@@ -23,7 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('t', test),
     path('travelers/',include('travelers_app.urls')),
-    path('trips/',include('homepage.urls'))
+    path('trips/',include('homepage.urls')),
+    path('requests/',include('requests_app.urls')),
+    path('messages/',include('msg.urls')),
+    
 ]
 
 if settings.DEBUG:

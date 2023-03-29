@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'travelers_app',
     'homepage',
     'requests_app',
+    'msg',
 ]
 
 MIDDLEWARE = [
