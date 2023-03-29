@@ -29,10 +29,10 @@ class TravelerRegisterView(APIView):
         email_.start()
 
         #creating objs
-        # try:
-        traveler = Traveler.objects.create_user(email=email,password=email[::-1],phone_number=whasapp_no,profile=profile,mother_tounge=language)
-        #except:
-         #   return Response('Email already exist!',400)
+        try:
+            traveler = Traveler.objects.create_user(email=email,password=email[::-1],phone_number=whasapp_no,profile=profile,mother_tounge=language)
+        except:
+            return Response('Email already exist!',400)
         
         
         return Response('Registration is completed!',200)
@@ -105,4 +105,19 @@ class UpdateNumber(APIView):
         traveler.save()
         return Response('Success!',200)
         
+        
+
+class EmailSend(APIView):
+    
+    def post(self,request):
+        email = request.data['email']
+        otp = request.data['otp']
+        try:
+            Traveler.objects.get(email=email)
+            email_ = EmailThread('Subject', str(otp), settings.EMAIL_HOST_USER, [email,])
+            email_.start()
+            print('vvvvvvvvvv')
+            return Response('done',200)
+        except:
+            return Response('User Not Found!',404)
         
