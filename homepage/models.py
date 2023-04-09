@@ -13,7 +13,11 @@ class Trip(models.Model):
     remaining_time = models.CharField(max_length=100)
     
     def save(self,*args, **kwargs):
-        timer = self.date - datetime.now().date()
+        s = self.date
+        format = '%Y-%m-%d'
+
+        timer = datetime.strptime(s,format).date() - datetime.now().date()
         self.remaining_time = f'{timer.days} days to go'
+        print(self.remaining_time)
         super().save(*args, **kwargs)
         

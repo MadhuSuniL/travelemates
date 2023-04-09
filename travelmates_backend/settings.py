@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'homepage',
     'requests_app',
     'msg',
+    'explore',
+    'import_export',
+
 ]
 
 MIDDLEWARE = [
@@ -99,7 +102,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
-    "REFRESH_TOKEN_LIFETIME": timedelta(months=3),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=90),
 }
 
 

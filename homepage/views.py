@@ -10,6 +10,37 @@ from rest_framework.generics import GenericAPIView , ListAPIView, CreateAPIView
 class TripView(ListAPIView):
     queryset = Trip.objects.all()
     serializer_class = TripSerializer
+    
+    def post(self,request):
+        title = request.data.get('title')
+        from_ = request.data.get('from')
+        to_ = request.data.get('to')
+        trip_for = request.data.get('trip_for')
+        date = request.data.get('date')
+        
+        print('gggggggggggggg',date)
+        trips = Trip.objects.all()
+        
+        if title != '':
+            trips = trips.filter(title__contains = title)
+        
+        if from_ != '':
+            trips = trips.filter(from_var__contains = from_)
+
+        if to_ != '':
+            trips = trips.filter(to_var__contains = to_)
+            
+        if trip_for != 'all':
+            trips = trips.filter(trip_for = trip_for)
+            
+        if date != '':
+            trips = trips.filter(date__gte = date)
+            
+        data = self.serializer_class(trips,many=True).data
+        # print(data)
+        return Response(data,200)
+
+
 
 class TripView2(ListAPIView):
     queryset = Trip.objects.all()
@@ -36,12 +67,14 @@ class TripCreateView(CreateAPIView):
         trip_for = request.data.get('trip_for',None)
         traveler = Traveler.objects.get(id=id)
         
+        print(',,,,,,,,,,,,,,,,,,,',title,from_,to_)
+        
         if title == None or from_ == None or to_ == None or date == None or trip_for == None:
-            return Response('Check',403) 
+            return Response('Check',400) 
             
         trip = Trip.objects.create(traveler=traveler,from_var=from_,to_var=to_,date=date,trip_for=trip_for,title=title)
-
-        res = Response(trip,200)
+        data = TripSerializer(trip).data
+        res = Response(data,200)
         return res
     
     

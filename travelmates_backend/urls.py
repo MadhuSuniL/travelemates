@@ -26,7 +26,7 @@ urlpatterns = [
     path('trips/',include('homepage.urls')),
     path('requests/',include('requests_app.urls')),
     path('messages/',include('msg.urls')),
-    
+    path('explore/',include('explore.urls')),
 ]
 
 if settings.DEBUG:
