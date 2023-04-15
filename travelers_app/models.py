@@ -20,6 +20,10 @@ class Traveler(AbstractUser, PermissionsMixin):
     premium = models.BooleanField(default=False)
     otp_verifyed = models.BooleanField(default=False)
 
+    trips = models.IntegerField(default=0)
+    mates = models.IntegerField(default=0)
+    fans = models.IntegerField(default=0)
+    
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
     objects = TravelerManeger()

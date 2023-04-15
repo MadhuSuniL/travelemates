@@ -116,7 +116,6 @@ class EmailSend(APIView):
             Traveler.objects.get(email=email)
             email_ = EmailThread('Subject', str(otp), settings.EMAIL_HOST_USER, [email,])
             email_.start()
-            print('vvvvvvvvvv')
             return Response('done',200)
         except:
             return Response('User Not Found!',404)

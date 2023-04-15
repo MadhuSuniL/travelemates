@@ -30,7 +30,7 @@ SECRET_KEY = 'django-insecure--$-f0o@_zjl#8_--=&y+g7w5^v+_09h*7jog(ndukrc5z#l((k
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['travelmates.pythonanywhere.com','https://travelmates.pythonanywhere.com','localhost']
+ALLOWED_HOSTS = ['127.0.0.1','travelmates.pythonanywhere.com','https://travelmates.pythonanywhere.com','localhost']
 
 # Application definition
 
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'requests_app',
     'msg',
     'explore',
+    'mates',
     'import_export',
 
 ]

@@ -18,7 +18,6 @@ class TripView(ListAPIView):
         trip_for = request.data.get('trip_for')
         date = request.data.get('date')
         
-        print('gggggggggggggg',date)
         trips = Trip.objects.all()
         
         if title != '':
@@ -67,7 +66,6 @@ class TripCreateView(CreateAPIView):
         trip_for = request.data.get('trip_for',None)
         traveler = Traveler.objects.get(id=id)
         
-        print(',,,,,,,,,,,,,,,,,,,',title,from_,to_)
         
         if title == None or from_ == None or to_ == None or date == None or trip_for == None:
             return Response('Check',400) 
