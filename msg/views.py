@@ -11,12 +11,23 @@ class AllMessages(APIView):
 
     def get(self,request):
         id = request.user.id
-        id = 22
+        id = 1
         traveler = Traveler.objects.get(id=id)
-        mesgs = Message.objects.filter(sender = traveler) | Message.objects.filter(receiver = traveler)
+        mesgs = Message.objects.filter(receiver = traveler)
         data = MessageSerializer(mesgs,many=True).data
         
         return Response(data)
+
+    def post(self,request):
+        id = request.user.id
+        id = 1
+        receiver_id = request.data['receiver_id']
+        sender = Traveler.objects.get(id=id)
+        receiver = Traveler.objects.get(id=id)
+        message = request.data['message']
+        msg = Message.objects.create(sender=sender,receiver=receiver,message=message)
+
+        return Response('OK',200)
 
 
 class IdMsg(APIView):
