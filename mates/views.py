@@ -13,7 +13,7 @@ class AllMatesView(APIView):
         traveler = Traveler.objects.get(id=id)
         
         mates = TravelsMates.objects.filter(traveler_var=traveler)
-        data = TravelsMateSerializer(mates).data
+        data = TravelsMateSerializer(mates,many=True).data
 
         return Response(data,200)
 

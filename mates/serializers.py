@@ -12,6 +12,7 @@ class TravelerSerializer(serializers.ModelSerializer):
         
 class TravelsMateSerializer(serializers.ModelSerializer):
     traveler_var = TravelerSerializer(read_only=True)
+    mate_var = TravelerSerializer(read_only=True)
     class Meta:
         model = TravelsMates
         fields = '__all__'
