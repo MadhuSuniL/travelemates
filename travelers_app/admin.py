@@ -17,6 +17,7 @@ class TravelerAdmin(UserAdmin):
         (None,{'fields':('email','password')}),
         (t("Personal info"), {"fields": (
             'name',
+            'phone_number',
             'profile'
         )}),
         ('Permissions',{'fields':('premium','otp_verifyed','is_staff','is_active')}),

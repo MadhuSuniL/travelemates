@@ -6,6 +6,11 @@ urlpatterns = [
     path('register', TravelerRegisterView.as_view()),
     path('otp_verify', OTPVerificationView.as_view()),
     path('send_email', EmailSend.as_view()),
-    path('token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('details/', TravelerDetails.as_view()),
+    path('update_name', UpdateName.as_view()),
+    path('update_number', UpdateNumber.as_view()),
+    path('update_profile', UpdateProfile.as_view()),
+    path('token/', TokenObtainPairView.as_view()),
+    path('token/refresh/', TokenRefreshView.as_view()),
 ]
+

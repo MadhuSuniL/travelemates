@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
+from rest_framework.generics import RetrieveAPIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from .models import Traveler
 from .email_send import EmailThread
 from django.conf import settings
+from .serializers import TravelerDetailsSerializer
 # Create your views here.
 
 
@@ -75,9 +77,10 @@ class LoginView(APIView):
 class UpdateProfile(APIView):
     
     def put(self,request):
-        # traveler = request.user
+        traveler = request.user
         profile = request.data['profile']
-        traveler = Traveler.objects.get(email='madhu@email.com')
+        print(profile,type(profile))
+        traveler = Traveler.objects.get(id=22)
         # profile = Traveler.objects.get(email=traveler.email)
         traveler.profile = profile
         traveler.save()
@@ -88,7 +91,7 @@ class UpdateName(APIView):
     def put(self,request):
         # traveler = request.user
         name = request.data['name']
-        traveler = Traveler.objects.get(email='madhu@email.com')
+        traveler = Traveler.objects.get(id=22)
         # profile = Traveler.objects.get(email=traveler.email)
         traveler.name = name
         traveler.save()
@@ -99,12 +102,23 @@ class UpdateNumber(APIView):
     def put(self,request):
         # traveler = request.user
         number = request.data['number']
-        traveler = Traveler.objects.get(email='madhu@email.com')
+        traveler = Traveler.objects.get(id=22)
         # profile = Traveler.objects.get(email=traveler.email)
         traveler.phone_number = number
         traveler.save()
         return Response('Success!',200)
         
+        
+class TravelerDetails(RetrieveAPIView):
+    serializer_class = TravelerDetailsSerializer
+    queryset = Traveler.objects.all()
+    
+    def get(self,request):
+        id = request.user.id
+        id = 22 
+        traveler = Traveler.objects.get(id=id)
+        data = self.serializer_class(traveler).data 
+        return Response(data,200)      
         
 
 class EmailSend(APIView):
