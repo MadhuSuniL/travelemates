@@ -10,8 +10,8 @@ from .serializers import MessageSerializer
 class AllMessages(APIView):
 
     def get(self,request):
+        # id = 1
         id = request.user.id
-        id = 1
         traveler = Traveler.objects.get(id=id)
         mesgs = Message.objects.filter(receiver = traveler)
         data = MessageSerializer(mesgs,many=True).data
@@ -19,8 +19,8 @@ class AllMessages(APIView):
         return Response(data)
 
     def post(self,request):
+        # id = 1
         id = request.user.id
-        id = 1
         receiver_id = request.data['receiver_id']
         sender = Traveler.objects.get(id=id)
         receiver = Traveler.objects.get(id=id)

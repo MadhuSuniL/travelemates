@@ -9,7 +9,7 @@ class AllMatesView(APIView):
     
     def get(self,request):
         id = request.user.id
-        id = 1
+        # id = 1
         traveler = Traveler.objects.get(id=id)
         
         mates = TravelsMates.objects.filter(traveler_var=traveler)

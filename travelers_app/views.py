@@ -17,6 +17,7 @@ from .serializers import TravelerDetailsSerializer
 
 
 class TravelerRegisterView(APIView):
+    authentication_classes =[]
     
     def post(self,request):
         email = request.data['email']
@@ -41,6 +42,8 @@ class TravelerRegisterView(APIView):
     
     
 class OTPVerificationView(APIView):
+    authentication_classes =[]
+    permission_classes = []
     
     def post(self,request):
         email = request.data['email']
@@ -59,6 +62,8 @@ class OTPVerificationView(APIView):
         return Response(data,200)
         
 class LoginView(APIView):
+    authentication_classes =[]
+    permission_classes = []
     
     def post(self,request):
         email = request.data['email']
@@ -77,10 +82,10 @@ class LoginView(APIView):
 class UpdateProfile(APIView):
     
     def put(self,request):
-        traveler = request.user
+        id = request.user.id
         profile = request.data['profile']
         print(profile,type(profile))
-        traveler = Traveler.objects.get(id=22)
+        traveler = Traveler.objects.get(id=id)
         # profile = Traveler.objects.get(email=traveler.email)
         traveler.profile = profile
         traveler.save()
@@ -89,9 +94,9 @@ class UpdateProfile(APIView):
 class UpdateName(APIView):
     
     def put(self,request):
-        # traveler = request.user
+        id = request.user.id
         name = request.data['name']
-        traveler = Traveler.objects.get(id=22)
+        traveler = Traveler.objects.get(id=id)
         # profile = Traveler.objects.get(email=traveler.email)
         traveler.name = name
         traveler.save()
@@ -100,9 +105,9 @@ class UpdateName(APIView):
 class UpdateNumber(APIView):
     
     def put(self,request):
-        # traveler = request.user
+        id = request.user.id
         number = request.data['number']
-        traveler = Traveler.objects.get(id=22)
+        traveler = Traveler.objects.get(id=id)
         # profile = Traveler.objects.get(email=traveler.email)
         traveler.phone_number = number
         traveler.save()
@@ -114,15 +119,16 @@ class TravelerDetails(RetrieveAPIView):
     queryset = Traveler.objects.all()
     
     def get(self,request):
-        id = request.user.id
         id = 22 
+        id = request.user.id
         traveler = Traveler.objects.get(id=id)
         data = self.serializer_class(traveler).data 
         return Response(data,200)      
         
 
 class EmailSend(APIView):
-    
+    authentication_classes =[]
+    permission_classes = []
     def post(self,request):
         email = request.data['email']
         otp = request.data['otp']

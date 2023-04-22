@@ -46,8 +46,8 @@ class TripView2(ListAPIView):
     serializer_class = TripSerializer
 
     def get(self,request):
-        # id = request.user.id
-        id = 22
+        # id = 22
+        id = request.user.id
         trips = self.queryset.filter(traveler__id = id)
         data = self.serializer_class(trips,many=True).data
         return Response(data,200)
@@ -58,7 +58,7 @@ class TripCreateView(CreateAPIView):
     
     def post(self,request):
         id = 22
-        #id = request.user.id
+        id = request.user.id
         title = request.data.get('title',None)
         from_ = request.data.get('from_var',None)
         to_ = request.data.get('to_var',None)

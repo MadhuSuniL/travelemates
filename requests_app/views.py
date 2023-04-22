@@ -11,8 +11,8 @@ from mates.models import TravelsMates
 class AllRequests(APIView):
 
     def get(self,request):
+        # id = 1
         id = request.user.id
-        id = 1
         traveler = Traveler.objects.get(id=id)
         mytrips = Trip.objects.filter(traveler=traveler)
         mytrips_ids = []
@@ -27,7 +27,8 @@ class AllRequests(APIView):
 
     #accepting-rejecting 
     def put(self,request,pk=None):
-        id = 1
+        # id = 1
+        id = request.user.id
         traveler = Traveler.objects.get(id=id)
         action = request.data['action']
         request_var = Request.objects.get(id=pk)
@@ -43,7 +44,8 @@ class AllRequests(APIView):
                 
         return Response('None',200)
     def delete(self,request,pk=None):
-        id = 1
+        # id = 1
+        id = request.user.id
         traveler = Traveler.objects.get(id=id)
         request_var = Request.objects.filter(traveler=traveler)
         request_var.delete()
